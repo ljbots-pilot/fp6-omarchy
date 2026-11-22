@@ -1,0 +1,31 @@
+--- run21/init
++++ run30/init
+@@ -67,8 +67,15 @@
+ log "console shell on $REAL (kernel active consoles: ${ACT:-unknown}; handed ${CON:-no tty} to cttyhack)"
+ # PID 1 must never exit (IS-F7): exit/Ctrl-D in the shell would kill init and,
+ # with CONFIG_PANIC_TIMEOUT=10, reboot the phone. Respawn the shell instead.
+-n=0
++# Back-off (IF-F4, run30): a dead console tty makes every shell exit at once,
++# which would respawn + log to kmsg ~1/s forever. A shell that lived < 3 s
++# counts as a fast exit; the first 5 fast exits in a row still respawn after
++# 1 s (a human typing exit/Ctrl-D), then the delay doubles 2,4,..,60 s (cap).
++# Any shell that lived >= 3 s resets the counter and the delay to 1 s.
++up() { u=$($B cut -d' ' -f1 /proc/uptime 2>/dev/null); s=${u%.*}; c=${u#*.}; c=${c#0}; echo $((${s:-0}*100+${c:-0})); }
++n=0; fast=0; d=1
+ while :; do
++  t0=$(up)
+   if [ -n "$CON" ]; then
+     $B setsid $B cttyhack $B sh <>"$CON" 2>&1
+   else
+@@ -76,6 +83,9 @@
+   fi
+   rc=$?
+   n=$((n+1))
+-  log "console shell exited (rc=$rc), respawn #$n in 1s on $REAL"
+-  $B sleep 1
++  lived=$(( $(up) - t0 ))
++  if [ $lived -lt 300 ]; then fast=$((fast+1)); else fast=0; d=1; fi
++  if [ $fast -gt 5 ]; then d=$((d*2)); [ $d -gt 60 ] && d=60; fi
++  log "console shell exited (rc=$rc, lived $((lived*10))ms), respawn #$n in ${d}s on $REAL"
++  $B sleep $d
+ done

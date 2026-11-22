@@ -1,0 +1,7 @@
+drm_exec.ko
+drm_gpuvm.ko
+gpu-sched.ko
+ocmem.ko
+drm_dp_aux_bus.ko
+ubwc_config.ko
+msm.ko

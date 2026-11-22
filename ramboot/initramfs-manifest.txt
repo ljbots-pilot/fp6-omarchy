@@ -1,0 +1,47 @@
+# type  path  mode  [source]
+# dir   : directory
+# file  : file from a named source (init=ramboot/init/init.sh, busybox=fetched binary)
+# link  : symlink to target
+# modules listed in ramboot/modules.order are copied from the kernel build into /lib/modules/<release>/ and an ORDER file is generated
+dir  dev  755
+dir  etc  755
+dir  mnt  755
+dir  proc  755
+dir  root  700
+dir  sbin  755
+dir  sys  755
+dir  sys/kernel  755
+dir  sys/kernel/config  755
+dir  tmp  1777
+dir  usr  755
+dir  usr/bin  755
+dir  usr/sbin  755
+dir  bin  755
+dir  lib  755
+dir  lib/modules  755
+file  init  755  init
+file  bin/busybox  755  busybox
+link  bin/ash  busybox
+link  bin/cat  busybox
+link  bin/chmod  busybox
+link  bin/chown  busybox
+link  bin/cp  busybox
+link  bin/cttyhack  busybox
+link  bin/dmesg  busybox
+link  bin/echo  busybox
+link  bin/hostname  busybox
+link  bin/ln  busybox
+link  bin/ls  busybox
+link  bin/mkdir  busybox
+link  bin/mknod  busybox
+link  bin/mount  busybox
+link  bin/mv  busybox
+link  bin/poweroff  busybox
+link  bin/reboot  busybox
+link  bin/rm  busybox
+link  bin/setsid  busybox
+link  bin/sh  busybox
+link  bin/sleep  busybox
+link  bin/switch_root  busybox
+link  bin/umount  busybox
+link  bin/uname  busybox

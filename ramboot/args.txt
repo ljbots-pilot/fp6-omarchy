@@ -1,0 +1,22 @@
+--header_version
+2
+--os_version
+99.87.36
+--os_patch_level
+2099-12
+--pagesize
+0x00001000
+--base
+0x00000000
+--kernel_offset
+0x00008000
+--ramdisk_offset
+0x01000000
+--second_offset
+0x00000000
+--tags_offset
+0x00000100
+--dtb_offset
+0x0000000001f00000
+--cmdline
+console=tty0 console=ttyMSM0,115200

@@ -1,0 +1,6 @@
+# One marker per line; a boot log must contain each as a substring (human check, RAM boot only).
+omarchy-mobile FP6 RAM-boot init
+gadget bound to UDC
+insmod msm.ko ok
+console shell on
+If you see this, RAM-boot succeeded

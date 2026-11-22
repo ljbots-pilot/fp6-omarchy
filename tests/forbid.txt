@@ -1,0 +1,8 @@
+fastboot[[:space:]]+(flash|erase|oem|flashing|set_active|format|delete-logical)
+(^|[[:space:];&|])dd[[:space:]]+[^#]*of=/dev
+efivar
+ssh-
+PRIVATE KEY
+(api|auth|access|bearer|refresh|secret|oauth)[_-]?token|gh[pousr]_[A-Za-z0-9]{20,}
+(^|[[:space:];&|])mkfs(\.|[[:space:]])
+blkdiscard

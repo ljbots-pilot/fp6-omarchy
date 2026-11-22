@@ -1,0 +1,7 @@
+kernel/config/fragments/
+kernel/patches/
+kernel/dts/
+kernel/build.sh
+ramboot/
+tests/
+results/
